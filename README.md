@@ -65,6 +65,13 @@ A régua de decisão do mercado mudou radicalmente nos últimos anos:
 - **Documentação:** Markdown / LaTeX
 
 ---
+## Entrega 01:
+![Print do Quadro de sprints](assets/sprint1.jpeg)
+## Entrega 02:
+
+## Entrega 03:
+
+## Entrega 04:
 
 ## ✒️ Grupo e Créditos
 
