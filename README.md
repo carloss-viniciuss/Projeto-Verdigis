@@ -69,16 +69,18 @@ A régua de decisão do mercado mudou radicalmente nos últimos anos:
 ## ✒️ Grupo e Créditos
 
 ### Integrantes:
-- **Ana Luiza Carvalho Xavier**
-- **Carlos Henrique Corrêa de Araujo**
-- **Carlos Vinicius Encarnação do Nascimento**
-- **João Pedro dos Santos Menezes**
-- **João Marcelo Franca da Costa Casado**
-- **Lucas de Moura Mattos**
-- **Matheus Raulino de Souza Moreira**
-- **Pétala Kiara da Silva**
-- **Thácio Soares Miranda dos Santos**
-- **Vitória de Assis Seabra**
+| Nome | E-mail |
+| :--- | :--- |
+| Ana Luiza Carvalho Xavier | alcx@cesar.school |
+| Carlos Henrique Corrêa de Araujo | chcass@cesar.school |
+| Carlos Vinicius Encarnação do Nascimento | cven@cesar.school |
+| João Pedro dos Santos Menezes | jpsm4@cesar.school |
+| João Marcelo Franca da Costa Casado | jmfcc@cesar.school |
+| Lucas de Moura Mattos | lmm7@cesar.school |
+| Matheus Raulino de Souza Moreira | mrsm@cesar.school |
+| Pétala Kiara da Silva | pks@cesar.school |
+| Thácio Soares Miranda dos Santos | tsms2@cesar.school |
+| Vitória de Assis Seabra | vas4@cesar.school |
 
 ### Parceiro do Desafio:
 - **Deloitte**
