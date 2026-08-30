@@ -81,7 +81,7 @@ A régua de decisão do mercado mudou radicalmente nos últimos anos:
 # Requisitos não triviais
 1) O usuário deve conseguir estabelecer metas ESG e o sistema deve comparar automaticamente os resultados registrados com essas metas.
 2) O sistema deve manter um histórico das alterações realizadas nos indicadores, registrando quem realizou a alteração, quando ocorreu e quais dados foram modificados.
-3)Criar um algoritmo que atribua uma pontuação geral de ESG para a empresa com base nos indicadores cadastrados.
+3) Criar um algoritmo que atribua uma pontuação geral de ESG para a empresa com base nos indicadores cadastrados.
 4) Trazer um algoritmo que permita que o sistema compare automaticamente o desempenho da empresa entre períodos.
 
 ## Entrega 02:
