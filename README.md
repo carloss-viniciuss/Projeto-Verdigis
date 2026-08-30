@@ -70,7 +70,7 @@ A régua de decisão do mercado mudou radicalmente nos últimos anos:
 [Análise de Competidores](./docs/analisedecompetidores.md)
 
 
-![Print do Quadro de sprints](sprint1.jpeg)
+![Print do Quadro de sprints](sprint/sprint1.jpeg)
 
 
 
