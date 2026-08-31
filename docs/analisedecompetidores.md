@@ -1,7 +1,7 @@
 ## 1. Análise Individual de Competidores
 
 ### 1.1. Paresi
-* **Visão Geral e Funcionamento:** Atua como uma ferramenta de diagnóstico de maturidade. O usuário preenche dados e responde a perguntas sobre as práticas da empresa, e a plataforma gera um panorama inicial com indicadores e orientações para os próximos passos.
+* **Visão Geral e Funcionamento:**  A Paresi é uma climatech / ESG tech brasileira voltada para a gestão de iniciativas e dados de sustentabilidade corporativa. Atua como uma ferramenta de diagnóstico de maturidade. O usuário preenche dados e responde a perguntas sobre as práticas da empresa, e a plataforma gera um panorama inicial com indicadores e orientações para os próximos passos.
 * **Pontos Fortes:**
   * Oferece um excelente direcionamento inicial por meio de diagnósticos estruturados, ajudando a empresa a entender por onde começar sua jornada ESG.
 * **Pontos Fracos:**
@@ -12,7 +12,7 @@
 ---
 
 ### 1.2. Orkea
-* **Visão Geral e Funcionamento:** É uma plataforma de monitoramento contínuo. Ela avalia o desempenho da empresa dividindo-o em pilares ESG, gera uma nota (score) e emite alertas para ajudar na gestão e acompanhamento das metas traçadas.
+* **Visão Geral e Funcionamento:** A Orkea é uma empresa/plataforma voltada para soluções digitais de governança, sustentabilidade e gestão corporativa. É uma plataforma de monitoramento contínuo. Ela avalia o desempenho da empresa dividindo-o em pilares ESG, gera uma nota (score) e emite alertas para ajudar na gestão e acompanhamento das metas traçadas.
 * **Pontos Fortes:**
   * A jornada do usuário é fluida e bem explicada. O uso de pontuações e benchmarks facilita o entendimento do desempenho.
 * **Pontos Fracos:**
@@ -23,7 +23,7 @@
 ---
 
 ### 1.3. ESG Business (Negócios ESG)
-* **Visão Geral e Funcionamento:** Focada em desmistificar o tema, funciona como um painel de controle simplificado. Ajuda empresas de menor porte ou em estágio inicial a organizar informações e acompanhar métricas básicas de sustentabilidade de forma direta.
+* **Visão Geral e Funcionamento:** ESG Business refere-se a modelos de negócios voltados para a prestação de serviços de consultoria, capacitação, educação corporativa e implementação de estratégias ESG para empresas. Focada em desmistificar o tema, funciona como um painel de controle simplificado. Ajuda empresas de menor porte ou em estágio inicial a organizar informações e acompanhar métricas básicas de sustentabilidade de forma direta.
 * **Pontos Fortes:**
   * Destaca-se pela simplicidade. A linguagem sem jargões e o dashboard com baixo esforço cognitivo tornam a ferramenta muito amigável para o dia a dia.
 * **Pontos Fracos:**
@@ -34,7 +34,7 @@
 ---
 
 ### 1.4. EcoVadis
-* **Visão Geral e Funcionamento:** A plataforma de avaliação é baseada em evidências. A empresa preenche um questionário customizado para seu setor/tamanho e faz upload de documentos comprovando suas ações.
+* **Visão Geral e Funcionamento:** A EcoVadis é uma das maiores e mais reconhecidas plataformas globais de avaliação e classificação (rating) de sustentabilidade para cadeias de suprimentos. A plataforma de avaliação é baseada em evidências. A empresa preenche um questionário customizado para seu setor/tamanho e faz upload de documentos comprovando suas ações.
 * **Pontos Fortes:**
   * Alta credibilidade; possui interface intuitiva, com excelente hierarquia visual e uso inteligente de blocos, reduzindo drasticamente a carga cognitiva.
 * **Pontos Fracos:**
@@ -45,7 +45,7 @@
 ---
 
 ### 1.5. Deep ESG (ESG Profundo)
-* **Visão Geral e Funcionamento:** É um software de mensuração profunda e geração de relatórios. Ele coleta e cruza grandes volumes de dados da empresa para automatizar cálculos complexos, como inventário de carbono, gerando relatórios padronizados exigidos por investidores e pelo mercado financeiro.
+* **Visão Geral e Funcionamento:** A DeepESG é uma startup e plataforma de tecnologia brasileira especializada em mensuração de impactos e descarbonização. É um software de mensuração profunda e geração de relatórios. Ele coleta e cruza grandes volumes de dados da empresa para automatizar cálculos complexos, como inventário de carbono, gerando relatórios padronizados exigidos por investidores e pelo mercado financeiro.
 * **Pontos Fortes:**
   * Altamente analítica e robusta. Destaca-se pela automação de dados e forte alinhamento com os principais frameworks globais de sustentabilidade (como GRI e GHG Protocol).
 * **Pontos Fracos:**
