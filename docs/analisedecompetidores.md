@@ -1,3 +1,6 @@
+## Introdução
+* Esta análise mapeia os principais concorrentes no mercado de soluções ESG com o objetivo de compreender suas ofertas, estratégias de posicionamento e diferenciais competitivos. O material serve como referência para identificar oportunidades de mercado, orientar o aprimoramento da nossa proposta de valor e fundamentar decisões estratégicas do produto.
+
 ## 1. Análise Individual de Competidores
 
 ### 1.1. Paresi
