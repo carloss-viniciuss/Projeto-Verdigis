@@ -28,17 +28,12 @@
 
           <div class="fm-card__corpo">
             <div class="fm-card__tags">
-<<<<<<< HEAD
               <span class="fm-badge" title="{{ meta.get_tipo_esg_display }}">{{ meta.tipo_esg }}</span>
               <span class="fm-tag"><b>Prazo:</b> {{ meta.deadline|date:"d/m/Y" }}</span>
-=======
-              <span class="fm-badge" title="{{ meta.get_pilar_esg_display }}">{{ meta.pilar_esg }}</span>
-              <span class="fm-tag">Prazo: {{ meta.deadline|date:"d/m/Y" }}</span>
->>>>>>> 14e70ab46e6ed547052bf3fe50238ac1659344a0
               <span class="fm-tag">Prioridade {{ meta.get_prioridade_display|lower }}</span>
               
               <!-- Badges para Tipo e Funcionário -->
-              <span class="fm-tag">{{ meta.get_tipo_display }}</span>
+              <span class="fm-tag"><strong>{{ meta.get_tipo_display }}</strong></span>
               {% if meta.tipo == 'INDIVIDUAL' and meta.funcionario %}
                 <span class="fm-tag fm-tag--user"> {{ meta.funcionario.user.get_full_name|default:meta.funcionario.user.username }}</span>
               {% endif %}
@@ -94,7 +89,7 @@
 <dialog id="modal-meta" class="fm-modal" onclick="if (event.target === this) this.close()">
   <h2 class="fm-modal__topo">Adicione:</h2>
 
-  <form method="post" class="fm-modal__corpo">
+  <form method="post" class="fm-modal__corpo" id="form-meta">
     {% csrf_token %}
 
     {% if form.non_field_errors %}
@@ -137,30 +132,52 @@
   </form>
 </dialog>
 
-{% if form.errors %}
-  <script>document.getElementById('modal-meta').showModal();</script>
-{% endif %}
-
 <!-- JavaScript para exibição condicional do Funcionário -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const selectTipo = document.querySelector('select[name="tipo"]');
+    const selectTipo = document.getElementById('id_tipo') || document.querySelector('select[name="tipo"]');
     const containerFuncionario = document.getElementById('campo-funcionario-container');
+    const selectFuncionario = containerFuncionario ? containerFuncionario.querySelector('select') : null;
+    const formMeta = document.getElementById('form-meta');
 
     function alternarExibicaoFuncionario() {
       if (!selectTipo || !containerFuncionario) return;
-      
+
       if (selectTipo.value === 'INDIVIDUAL') {
         containerFuncionario.style.display = 'block';
+        if (selectFuncionario) {
+          selectFuncionario.required = true;
+        }
       } else {
         containerFuncionario.style.display = 'none';
+        if (selectFuncionario) {
+          selectFuncionario.required = false;
+          selectFuncionario.value = ''; // Limpa o ID selecionado para não enviar valor residual no POST
+        }
       }
     }
 
     if (selectTipo) {
       selectTipo.addEventListener('change', alternarExibicaoFuncionario);
+      // Executa na carga inicial da página
       alternarExibicaoFuncionario();
     }
+
+    // Se o formulário for resetado, reavalia a visibilidade
+    if (formMeta) {
+      formMeta.addEventListener('reset', function() {
+        setTimeout(alternarExibicaoFuncionario, 10);
+      });
+    }
+
+    // Caso existam erros de validação retornados pelo Django, abre o modal e ajusta os campos
+    {% if form.errors %}
+      const modalMeta = document.getElementById('modal-meta');
+      if (modalMeta) {
+        modalMeta.showModal();
+        alternarExibicaoFuncionario();
+      }
+    {% endif %}
   });
 </script>
 {% endblock %}
