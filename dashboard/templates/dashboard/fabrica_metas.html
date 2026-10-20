@@ -1,4 +1,5 @@
 {% extends "forum/base.html" %}
+{% load static %}
 
 {% comment %}
   Fábrica de metas (view fabrica_metas_view). Exige login. Métodos: GET e POST (cria meta).
@@ -18,8 +19,12 @@
 
 {% block content %}
 <div class="moldura-vidro">
-  <section class="dash-corpo">
-
+  <section class="dash-corpo fm-corpo">
+      <div class="av-topo">
+        <a class="av-voltar" href="{% url 'dashboard:dashboard' %}" aria-label="Voltar para o dashboard">
+          <img class="av-voltar__icone" src="{% static 'img/icone-seta.svg' %}" alt="">
+        </a>
+      </div>
     <!-- Lista de metas -->
     <div class="fm-lista">
       {% for meta in metas %}
@@ -28,12 +33,13 @@
 
           <div class="fm-card__corpo">
             <div class="fm-card__tags">
-              <span class="fm-badge" title="{{ meta.get_tipo_esg_display }}">{{ meta.tipo_esg }}</span>
+              <span class="fm-badge" title="{{ meta.get_pilar_esg_display }}">{{ meta.pilar_esg }}</span>
               <span class="fm-tag"><b>Prazo:</b> {{ meta.deadline|date:"d/m/Y" }}</span>
-              <span class="fm-tag">Prioridade {{ meta.get_prioridade_display|lower }}</span>
+              <span class="fm-tag"><b>Prioridade:</b> {{ meta.get_prioridade_display|lower }}</span>
               
               <!-- Badges para Tipo e Funcionário -->
               <span class="fm-tag"><strong>{{ meta.get_tipo_display }}</strong></span>
+
               {% if meta.tipo == 'INDIVIDUAL' and meta.funcionario %}
                 <span class="fm-tag fm-tag--user"> {{ meta.funcionario.user.get_full_name|default:meta.funcionario.user.username }}</span>
               {% endif %}
