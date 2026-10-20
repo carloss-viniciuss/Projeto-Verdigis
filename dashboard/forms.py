@@ -19,9 +19,9 @@ class FormsMetas(forms.ModelForm):
             'funcionario': forms.Select(attrs={'class': 'form-select'}),
         }
 
-    def __init__(self, company=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        company = kwargs.pop('company', None)
         super().__init__(*args, **kwargs)
-        # Filtra para exibir apenas os funcionários da empresa logada
         if company:
             self.fields['funcionario'].queryset = Funcionario.objects.filter(company=company)
         self.fields['funcionario'].empty_label = "Selecione o funcionário..."

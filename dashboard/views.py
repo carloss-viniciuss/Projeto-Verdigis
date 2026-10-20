@@ -48,8 +48,8 @@ def fabrica_metas_view(request):
         messages.error(request, "Cadastre sua empresa antes de usar a Fábrica de Metas.")
         return redirect('company_register')
 
-    # Filtra a lista de acordo com o tipo de usuario
-    if hasattr(request.user, 'FUNCIONARIO'): #esse hasattr serve justamente pra verificar se é funcionario ou geral
+    # Filtra a lista de acordo com o tipo de usuário
+    if hasattr(request.user, 'FUNCIONARIO'): # Verifica se é funcionário ou gestor
         metas = Meta.objects.filter(
             company=company
         ).filter(
@@ -59,7 +59,8 @@ def fabrica_metas_view(request):
         metas = Meta.objects.filter(company=company).order_by('completo', 'deadline')
 
     if request.method == 'POST':
-        form = FormsMetas(company, request.POST)
+        # Passa request.POST e nomeia company=company
+        form = FormsMetas(request.POST, company=company)
         if form.is_valid():
             meta = form.save(commit=False)
             meta.company = company
@@ -67,7 +68,8 @@ def fabrica_metas_view(request):
             meta.save()
             return redirect('dashboard:fabrica_metas')
     else:
-        form = FormsMetas(company)
+        # Passa apenas o argumento nomeado company=company
+        form = FormsMetas(company=company)
 
     return render(request, 'dashboard/fabrica_metas.html', {
         'metas': metas,
@@ -76,21 +78,30 @@ def fabrica_metas_view(request):
     })
 
 
+
 @login_required
 def editar_meta_view(request, meta_id):
-    meta = get_object_or_404(Meta, id=meta_id, usuario=request.user)
+    company = _obter_empresa_usuario(request.user)
+    
+    # 1. Busca a meta garantindo o ID e a empresa do usuário
+    meta = get_object_or_404(Meta, id=meta_id, company=company)
+
     if request.method == 'POST':
-        form = FormsMetas(request.POST, instance=meta) #instace == atualizar
+        # 2. Instancia o formulário passando request.POST, instance e company de forma nomeada
+        form = FormsMetas(request.POST, instance=meta, company=company)
+        
         if form.is_valid():
             form.save()
             return redirect('dashboard:fabrica_metas')
     else:
-        form = FormsMetas(instance=meta)
+        # No GET, carrega os dados atuais da meta no formulário
+        form = FormsMetas(instance=meta, company=company)
 
     return render(request, 'dashboard/editar_meta.html', {
         'form': form,
         'meta': meta,
     })
+
 
 
 @login_required
