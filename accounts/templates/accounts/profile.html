@@ -29,7 +29,7 @@
     <dd>{{ user.profile.bio|linebreaksbr }}</dd>
   {% endif %}
 
-  {% if user.profile.tipo == "empresa" %}
+  {% if user.profile.tipo == "EMPRESA" %}
     {% if user.profile.nome_empresa %}
       <dt>Nome da empresa</dt>
       <dd>{{ user.profile.nome_empresa }}</dd>
@@ -40,8 +40,13 @@
       <dd>{{ user.profile.cnpj }}</dd>
     {% endif %}
   {% endif %}
+
+  {% if user.profile.telefone %}
+    <dt>Telefone</dt>
+    <dd>{{ user.profile.telefone }}</dd>
+  {% endif %}
 </dl>
-  <button class="btn-submit"><a href="{% url 'edit_profile' %}">Editar Perfil</a></button>
+  <button class="btn-submit" onclick="window.location.href='{% url 'edit_profile' %}'">Editar Perfil</button>
   <button type="submit" form="form-sair" class="btn-submit btn-logout">Sair</button>
   <form method="get" action="{% url 'delete' %}" class="form-excluir">
     <button type="submit" class="btn-submit btn-excluir">Excluir conta</button>
