@@ -320,20 +320,80 @@ class EmployeeLoginForm(LoginForm):
         return cleaned
 
 class EditProfileForm(forms.ModelForm):
+    """Perfil pessoal: vale para funcionário e para o responsável da empresa."""
+    username = forms.CharField(
+        label='Nome de usuário',
+        max_length=150,
+        validators=User._meta.get_field('username').validators,
+    )
+
     class Meta:
         model = UserProfile
-        fields = ['nome', 'foto_perfil']
+        fields = ['nome', 'email', 'telefone', 'foto_perfil', 'bio']
         labels = {
             'nome': 'Nome',
+            'email': 'E-mail',
+            'telefone': 'Telefone',
             'foto_perfil': 'Foto de Perfil',
+            'bio': 'Bio',
         }
         widgets = {
             'nome': forms.TextInput(attrs={'placeholder': 'Digite seu nome'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'seuemail@exemplo.com'}),
+            'telefone': forms.TextInput(attrs={'placeholder': '(81) 99999-8888', 'data-mask': 'telefone'}),
             'foto_perfil': forms.FileInput(attrs={'accept': 'image/*'}),
+            'bio': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Fale um pouco sobre você'}),
         }
 
-    def clean_profile_picture(self):
+    def __init__(self, *args, user, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+        self.fields['username'].initial = user.username
+        self.fields['username'].widget.attrs['placeholder'] = 'Digite seu nome de usuário'
+        self.order_fields(['username', 'nome', 'email', 'telefone', 'foto_perfil', 'bio'])
+
+    def clean_username(self):
+        username = self.cleaned_data['username'].strip()
+        if User.objects.filter(username__iexact=username).exclude(pk=self.user.pk).exists():
+            raise forms.ValidationError('Este nome de usuário já está em uso.')
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email', '').strip().lower()
+        if email and User.objects.filter(email__iexact=email).exclude(pk=self.user.pk).exists():
+            raise forms.ValidationError('Já existe uma conta com este e-mail.')
+        return email
+
+    def clean_telefone(self):
+        telefone = re.sub(r'\D', '', self.cleaned_data.get('telefone', ''))
+        if telefone and len(telefone) not in (10, 11):
+            raise forms.ValidationError('Telefone inválido. Informe DDD e número.')
+        return telefone
+
+    def clean_foto_perfil(self):
         foto = self.cleaned_data.get('foto_perfil')
         if isinstance(foto, UploadedFile) and foto.size > TAMANHO_MAX_AVATAR:
             raise forms.ValidationError('A imagem deve ter no máximo 2 MB.')
         return foto
+
+    def save(self, commit=True):
+        profile = super().save(commit=commit)
+        if commit:
+            self.user.username = self.cleaned_data['username']
+            self.user.email = self.cleaned_data.get('email', '')
+            self.user.save(update_fields=['username', 'email'])
+        return profile
+
+
+class EditCompanyForm(CompanyForm):
+    """Dados da empresa. CNPJ e senha de acesso ficam de fora de propósito."""
+    senha_funcionarios = None  # remove o campo herdado de CompanyForm
+
+    class Meta(CompanyForm.Meta):
+        exclude = None
+        fields = [
+            'razao_social', 'nome_fantasia',
+            'inscricao_municipal', 'inscricao_estadual', 'niche',
+            'cep', 'logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'uf',
+            'telefone_fixo', 'celular_whatsapp',
+        ]

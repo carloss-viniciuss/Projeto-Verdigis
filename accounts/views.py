@@ -13,8 +13,9 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.http import require_GET, require_POST
 
 from .forms import (
-    CODIGO_CREDENCIAL_EMPRESA, CompanyForm, DeleteAccountForm, EmployeeLoginForm,
-    EmployeeSignupForm, LoginForm, ProfileForm, SignupForm, _normalizar_cnpj,
+    CODIGO_CREDENCIAL_EMPRESA, CompanyForm, DeleteAccountForm, EditCompanyForm,
+    EditProfileForm, EmployeeLoginForm, EmployeeSignupForm, LoginForm,
+    ProfileForm, SignupForm, _normalizar_cnpj,
 )
 from .models import Funcionario, Niche, UserProfile
 
@@ -260,10 +261,32 @@ def login_funcionario(request):
 @login_required
 def edit_profile(request):
     profile_obj, _ = UserProfile.objects.get_or_create(user=request.user)
-    form = ProfileForm(request.POST or None, request.FILES or None, instance=profile_obj)
-    if request.method == "POST" and form.is_valid():
-        form.save()
-        messages.success(request, 'Perfil atualizado com sucesso.')
-        return redirect('profile')
+    company = request.user.companies.first()  # só responsáveis têm empresa
 
-    return render(request, 'accounts/edit_profile.html', {'form': form})
+    dados = _dados_post(request)
+    form = EditProfileForm(dados, request.FILES or None, instance=profile_obj, user=request.user)
+    company_form = (
+        EditCompanyForm(dados, instance=company, prefix='empresa') if company else None
+    )
+
+    if request.method == 'POST':
+        validos = form.is_valid()
+        if company_form is not None:
+            validos = company_form.is_valid() and validos
+
+        if validos:
+            with transaction.atomic():
+                form.save()
+                if company_form is not None:
+                    company = company_form.save()
+                    UserProfile.objects.filter(pk=profile_obj.pk).update(
+                        nome_empresa=company.nome_fantasia
+                    )
+            messages.success(request, 'Perfil atualizado com sucesso.')
+            return redirect('profile')
+        messages.warning(request, 'Corrija os campos destacados.')
+
+    return render(request, 'accounts/edit_profile.html', {
+        'form': form,
+        'company_form': company_form,
+    })
